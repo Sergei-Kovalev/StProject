@@ -2,10 +2,9 @@ package ru.ngs.summerjob.stproject.validator.register;
 
 import ru.ngs.summerjob.stproject.domain.Adult;
 import ru.ngs.summerjob.stproject.domain.Child;
-import ru.ngs.summerjob.stproject.domain.register.CityRegisterCheckerResponse;
 import ru.ngs.summerjob.stproject.domain.Person;
+import ru.ngs.summerjob.stproject.domain.register.CityRegisterResponse;
 import ru.ngs.summerjob.stproject.exception.CityRegisterException;
-import ru.ngs.summerjob.stproject.exception.TransportException;
 
 public class FakeCityRegisterChecker implements CityRegisterChecker {
     public static final String GOOD_1 = "1000";
@@ -17,28 +16,24 @@ public class FakeCityRegisterChecker implements CityRegisterChecker {
     public static final String ERROR_T_1 = "1003";
     public static final String ERROR_T_2 = "2003";
 
-    public CityRegisterCheckerResponse checkPerson(Person person) throws CityRegisterException, TransportException {
-        CityRegisterCheckerResponse res = new CityRegisterCheckerResponse();
+    public CityRegisterResponse checkPerson(Person person) throws CityRegisterException {
+        CityRegisterResponse res = new CityRegisterResponse();
         if (person instanceof Adult) {
             Adult t = (Adult) person;
             if (t.getPassportSeria().equals(GOOD_1) || t.getPassportSeria().equals(GOOD_2)) {
-                res.setExisting(true);
+                res.setRegistered(true);
                 res.setTemporal(false);
             }
             if (t.getPassportSeria().equals(BAD_1) || t.getPassportSeria().equals(BAD_2)) {
-                res.setExisting(false);
+                res.setRegistered(false);
             }
             if (t.getPassportSeria().equals(ERROR_1) || t.getPassportSeria().equals(ERROR_2)) {
                 CityRegisterException ex = new CityRegisterException("1", "GRN Error " + t.getPassportSeria());
                 throw ex;
             }
-            if (t.getPassportSeria().equals(ERROR_T_1) || t.getPassportSeria().equals(ERROR_T_2)) {
-                TransportException ex = new TransportException("Transport Error " + t.getPassportSeria());
-                throw ex;
-            }
         }
         if (person instanceof Child) {
-            res.setExisting(true);
+            res.setRegistered(true);
             res.setTemporal(true);
         }
         System.out.println(res);

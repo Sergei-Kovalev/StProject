@@ -15,6 +15,7 @@ public class CityRegisterException extends Exception {
 
     }
 
+
     public String getCode() {
         return code;
     }

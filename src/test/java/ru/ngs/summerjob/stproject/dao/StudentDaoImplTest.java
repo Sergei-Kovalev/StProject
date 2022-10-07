@@ -49,11 +49,11 @@ class StudentDaoImplTest {
         RegisterOffice ro = new RegisterOffice(1L, "", "");
         so.setMarriageOffice(ro);
 
-        Street street = new Street(1L, "First street");
-        Address address = new Address("195000", street, "12", "", "142");
+        Street street = new Street(1L, "Peramogi street");
+        Address address = new Address("195000", street, "10", "2", "121");
 
         //husband
-        Adult husband = new Adult("Petrov", "Viktor", "Sergeevich", LocalDate.of(1997, 8, 24));
+        Adult husband = new Adult("Vasiliev", "Pavel", "Nikolaevich", LocalDate.of(1995, 3, 18));
         husband.setPassportSeria("" + (1000 + id));
         husband.setPassportNumber("" + (100000 + id));
         husband.setIssueDate(LocalDate.of(2017, 9 , 15));
@@ -66,7 +66,7 @@ class StudentDaoImplTest {
         husband.setStudentId("HH12345");
 
         //wife
-        Adult wife = new Adult("Petrova", "Veronika", "Alekseevna", LocalDate.of(1998, 3, 12));
+        Adult wife = new Adult("Vasilieva", "Irina", "Petrovna", LocalDate.of(1997, 8, 21));
         wife.setPassportSeria("" + (2000 + id));
         wife.setPassportNumber("" + (200000 + id));
         wife.setIssueDate(LocalDate.of(2018, 4 , 5));
@@ -79,7 +79,7 @@ class StudentDaoImplTest {
         wife.setStudentId("WW12345");
 
         //child
-        Child child1 = new Child("Petrova", "Irina", "Viktorovna", LocalDate.of(2018, 6, 29));
+        Child child1 = new Child("Vasilieva", "Evgenia", "Pavlovna", LocalDate.of(2016, 1, 1));
         child1.setCertificateNumber("" + (300000 + id));
         child1.setIssueDate(LocalDate.of(2018, 7,  19));
 
@@ -88,7 +88,7 @@ class StudentDaoImplTest {
         child1.setAddress(address);
 
         //child2
-        Child child2 = new Child("Petrov", "Evgeniy", "Viktorovich", LocalDate.of(2018, 6, 29));
+        Child child2 = new Child("Vasiliev", "Aleksandr", "Pavlovich", LocalDate.of(2018, 10, 24));
         child2.setCertificateNumber("" + (400000 + id));
         child2.setIssueDate(LocalDate.of(2018, 6,  11));
 

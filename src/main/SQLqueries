@@ -1,0 +1,33 @@
+
+LIKE - содержит ли подстроку
+SELECT street_code, street_name FROM jc_street WHERE street_name LIKE '%Firs%'
+
+UPPER() - приводит строку к верхнему регистру
+SELECT street_code, street_name FROM jc_street WHERE UPPER(street_name) LIKE UPPER('%firs%')
+
+LIKE '02___0000000' - выбирает все значения по маске, где ___ то что может меняться
+SELECT * FROM jc_country_struct WHERE area_id LIKE '02___0000000' AND area_id <> '020000000000'
+
+<> - не равно (в примере исключает выборку со значением '020000000000'
+SELECT * FROM jc_country_struct WHERE area_id LIKE '02___0000000' AND area_id <> '020000000000'
+
+date - дата
+timestamp - время и дата
+
+ORDER BY - сортировка по колонке (в данном случае по колонке время)
+SELECT * FROM jc_student_order WHERE student_order_status = 1 ORDER BY student_order_date
+
+INNER JOIN - слияние таблиц (в примере по условию.. там где поля соответствуют в разных таблицах)
+SELECT * FROM jc_student_order INNER JOIN jc_register_office ON jc_register_office.r_office_id = jc_student_order.register_office_id
+
+UPDATE такую то таблицу SET такое то значение параметра где (WHERE) такое то значение
+UPDATE jc_student_order SET register_office_id = 2 WHERE student_order_id IN (1, 3, 5, 7)
+
+WHERE значение поля IN такое то
+WHERE student_order_id IN (5,7,8)
+
+LIMIT ? или LIMIT ?,? - лимит вытаскиваемых записей или от 1 до ? или от ? до ?
+SELECT * FROM jc_student_order LIMIT 5
+
+CREATE INDEX - создать индекс с таким то названием в таблице такой то по такому то полю
+CREATE INDEX idx_student_order_status ON jc_student_order(student_order_status)

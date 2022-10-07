@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" >
+    <!--status="WARN" - включение в статус Trace будет выводить отладочную информацию для самого log4j-->
+    <Properties>
+        <Property name="basePath">C:\Users\User\IdeaProjects\StProject\target\</Property>
+        <!--здесь можно создать путь и имя файла-->
+        <Property name="file1Name">first.log</Property>
+    </Properties>
+
+    <Appenders>
+
+        <RollingFile name="fileLogger"
+                     fileName="${basePath}${file1Name}"
+                     filePattern="${basePath}${file1Name}-%d{yyyy-MM-dd}.log">
+            <!--filePattern как я понял дает откончание для файлового имени когда их больше 1-->
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <!-- Max 10 files will be created everyday -->
+            <DefaultRolloverStrategy max="10">
+                <Delete basePath="${basePath}" maxDepth="10">
+                    <!-- Delete all files older than 30 days -->
+                    <IfLastModified age="30d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="info" additivity="false">
+            <appender-ref ref="fileLogger" />
+        </Root>
+        <logger name="ru.ngs.summerjob.stproject.dao" level="all" additivity="false">
+            <appender-ref ref="fileLogger" />
+        </logger>
+    </Loggers>
+
+</Configuration>
